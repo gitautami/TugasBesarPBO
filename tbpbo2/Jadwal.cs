@@ -16,5 +16,10 @@ namespace tbpbo2
         {
             InitializeComponent();
         }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

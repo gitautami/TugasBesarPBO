@@ -380,7 +380,7 @@
             buttonLaporan.ForeColor = Color.DarkRed;
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
-            buttonLaporan.Location = new Point(3, 425);
+            buttonLaporan.Location = new Point(0, 428);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Size = new Size(144, 71);
             buttonLaporan.TabIndex = 5;
@@ -394,7 +394,7 @@
             buttonJadwal.ForeColor = Color.DarkRed;
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
-            buttonJadwal.Location = new Point(3, 195);
+            buttonJadwal.Location = new Point(0, 196);
             buttonJadwal.Name = "buttonJadwal";
             buttonJadwal.Size = new Size(144, 75);
             buttonJadwal.TabIndex = 4;

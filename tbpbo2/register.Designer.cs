@@ -133,7 +133,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(188, 335);
+            linkLabel1.Location = new Point(188, 324);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(46, 20);
             linkLabel1.TabIndex = 9;
@@ -146,7 +146,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.DarkRed;
-            label5.Location = new Point(33, 335);
+            label5.Location = new Point(33, 324);
             label5.Name = "label5";
             label5.Size = new Size(149, 18);
             label5.TabIndex = 10;

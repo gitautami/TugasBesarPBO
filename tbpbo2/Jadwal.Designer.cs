@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Jadwal));
             panel1 = new Panel();
+            buttonInputManual = new Button();
             buttonLogout = new Button();
             buttonLaporan = new Button();
             buttonJadwal = new Button();
@@ -54,7 +55,6 @@
             dataGridView1 = new DataGridView();
             label9 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
-            buttonInputManual = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -71,6 +71,20 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(144, 612);
             panel1.TabIndex = 1;
+            // 
+            // buttonInputManual
+            // 
+            buttonInputManual.Font = new Font("Century", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonInputManual.ForeColor = Color.DarkRed;
+            buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
+            buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
+            buttonInputManual.Location = new Point(0, 313);
+            buttonInputManual.Name = "buttonInputManual";
+            buttonInputManual.Size = new Size(144, 71);
+            buttonInputManual.TabIndex = 18;
+            buttonInputManual.Text = "Input Manual Kondisi Kesehatan";
+            buttonInputManual.TextAlign = ContentAlignment.BottomCenter;
+            buttonInputManual.UseVisualStyleBackColor = true;
             // 
             // buttonLogout
             // 
@@ -90,7 +104,7 @@
             buttonLaporan.ForeColor = Color.DarkRed;
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
-            buttonLaporan.Location = new Point(3, 425);
+            buttonLaporan.Location = new Point(0, 425);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Size = new Size(144, 71);
             buttonLaporan.TabIndex = 5;
@@ -105,7 +119,7 @@
             buttonJadwal.ForeColor = Color.DarkRed;
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
-            buttonJadwal.Location = new Point(3, 195);
+            buttonJadwal.Location = new Point(0, 195);
             buttonJadwal.Name = "buttonJadwal";
             buttonJadwal.Size = new Size(144, 75);
             buttonJadwal.TabIndex = 4;
@@ -302,20 +316,6 @@
             label9.Size = new Size(116, 18);
             label9.TabIndex = 45;
             label9.Text = "PENGINGAT!!!";
-            // 
-            // buttonInputManual
-            // 
-            buttonInputManual.Font = new Font("Century", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInputManual.ForeColor = Color.DarkRed;
-            buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
-            buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
-            buttonInputManual.Location = new Point(0, 313);
-            buttonInputManual.Name = "buttonInputManual";
-            buttonInputManual.Size = new Size(144, 71);
-            buttonInputManual.TabIndex = 18;
-            buttonInputManual.Text = "Input Manual Kondisi Kesehatan";
-            buttonInputManual.TextAlign = ContentAlignment.BottomCenter;
-            buttonInputManual.UseVisualStyleBackColor = true;
             // 
             // Jadwal
             // 

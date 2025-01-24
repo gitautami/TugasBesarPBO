@@ -35,7 +35,6 @@
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
-            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -54,12 +53,13 @@
             buttonLogin.BackColor = Color.DarkRed;
             buttonLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogin.ForeColor = Color.White;
-            buttonLogin.Location = new Point(104, 344);
+            buttonLogin.Location = new Point(102, 303);
             buttonLogin.Name = "buttonLogin";
             buttonLogin.Size = new Size(124, 49);
             buttonLogin.TabIndex = 16;
             buttonLogin.Text = "Login";
             buttonLogin.UseVisualStyleBackColor = false;
+            buttonLogin.Click += buttonLogin_Click;
             // 
             // textBoxPassword
             // 
@@ -108,23 +108,11 @@
             label1.TabIndex = 9;
             label1.Text = "Welcome!";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Century", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.DarkRed;
-            label2.Location = new Point(146, 259);
-            label2.Name = "label2";
-            label2.Size = new Size(150, 21);
-            label2.TabIndex = 18;
-            label2.Text = " forget password?";
-            // 
             // login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(745, 450);
-            Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(buttonLogin);
             Controls.Add(textBoxPassword);
@@ -148,6 +136,5 @@
         private Label label4;
         private Label label3;
         private Label label1;
-        private Label label2;
     }
 }

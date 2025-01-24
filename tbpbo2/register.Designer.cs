@@ -37,6 +37,8 @@
             textBoxPassword = new TextBox();
             buttonRegister = new Button();
             pictureBox1 = new PictureBox();
+            linkLabel1 = new LinkLabel();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +58,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.DarkRed;
-            label2.Location = new Point(28, 114);
+            label2.Location = new Point(33, 84);
             label2.Name = "label2";
             label2.Size = new Size(57, 21);
             label2.TabIndex = 1;
@@ -67,7 +69,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Century", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.DarkRed;
-            label3.Location = new Point(28, 203);
+            label3.Location = new Point(33, 173);
             label3.Name = "label3";
             label3.Size = new Size(92, 21);
             label3.TabIndex = 2;
@@ -78,7 +80,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkRed;
-            label4.Location = new Point(28, 287);
+            label4.Location = new Point(33, 257);
             label4.Name = "label4";
             label4.Size = new Size(76, 18);
             label4.TabIndex = 3;
@@ -86,21 +88,21 @@
             // 
             // textBoxNama
             // 
-            textBoxNama.Location = new Point(28, 138);
+            textBoxNama.Location = new Point(33, 108);
             textBoxNama.Name = "textBoxNama";
             textBoxNama.Size = new Size(262, 27);
             textBoxNama.TabIndex = 4;
             // 
             // textBoxUsername
             // 
-            textBoxUsername.Location = new Point(28, 227);
+            textBoxUsername.Location = new Point(33, 197);
             textBoxUsername.Name = "textBoxUsername";
             textBoxUsername.Size = new Size(262, 27);
             textBoxUsername.TabIndex = 5;
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(28, 308);
+            textBoxPassword.Location = new Point(33, 278);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.Size = new Size(262, 27);
             textBoxPassword.TabIndex = 6;
@@ -116,6 +118,7 @@
             buttonRegister.TabIndex = 7;
             buttonRegister.Text = "Registrasi";
             buttonRegister.UseVisualStyleBackColor = false;
+            buttonRegister.Click += buttonRegister_Click;
             // 
             // pictureBox1
             // 
@@ -127,11 +130,35 @@
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(188, 335);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(46, 20);
+            linkLabel1.TabIndex = 9;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Login";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.DarkRed;
+            label5.Location = new Point(33, 335);
+            label5.Name = "label5";
+            label5.Size = new Size(149, 18);
+            label5.TabIndex = 10;
+            label5.Text = "Sudah Punya Akun?";
+            // 
             // register
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(728, 450);
+            Controls.Add(label5);
+            Controls.Add(linkLabel1);
             Controls.Add(pictureBox1);
             Controls.Add(buttonRegister);
             Controls.Add(textBoxPassword);
@@ -159,5 +186,7 @@
         private TextBox textBoxPassword;
         private Button buttonRegister;
         private PictureBox pictureBox1;
+        private LinkLabel linkLabel1;
+        private Label label5;
     }
 }

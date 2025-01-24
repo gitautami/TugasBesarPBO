@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
-            button1 = new Button();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
+            buttonLogin = new Button();
+            textBoxPassword = new TextBox();
+            textBoxUsername = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
@@ -49,31 +49,31 @@
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // buttonLogin
             // 
-            button1.BackColor = Color.DarkRed;
-            button1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(104, 344);
-            button1.Name = "button1";
-            button1.Size = new Size(124, 49);
-            button1.TabIndex = 16;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = false;
+            buttonLogin.BackColor = Color.DarkRed;
+            buttonLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonLogin.ForeColor = Color.White;
+            buttonLogin.Location = new Point(104, 344);
+            buttonLogin.Name = "buttonLogin";
+            buttonLogin.Size = new Size(124, 49);
+            buttonLogin.TabIndex = 16;
+            buttonLogin.Text = "Login";
+            buttonLogin.UseVisualStyleBackColor = false;
             // 
-            // textBox3
+            // textBoxPassword
             // 
-            textBox3.Location = new Point(34, 229);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(262, 27);
-            textBox3.TabIndex = 15;
+            textBoxPassword.Location = new Point(34, 229);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.Size = new Size(262, 27);
+            textBoxPassword.TabIndex = 15;
             // 
-            // textBox2
+            // textBoxUsername
             // 
-            textBox2.Location = new Point(34, 131);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(262, 27);
-            textBox2.TabIndex = 14;
+            textBoxUsername.Location = new Point(34, 131);
+            textBoxUsername.Name = "textBoxUsername";
+            textBoxUsername.Size = new Size(262, 27);
+            textBoxUsername.TabIndex = 14;
             // 
             // label4
             // 
@@ -126,9 +126,9 @@
             ClientSize = new Size(745, 450);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
-            Controls.Add(button1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(buttonLogin);
+            Controls.Add(textBoxPassword);
+            Controls.Add(textBoxUsername);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
@@ -142,9 +142,9 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Button button1;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private Button buttonLogin;
+        private TextBox textBoxPassword;
+        private TextBox textBoxUsername;
         private Label label4;
         private Label label3;
         private Label label1;

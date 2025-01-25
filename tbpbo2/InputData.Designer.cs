@@ -64,6 +64,7 @@
             buttonJadwal = new Button();
             label1 = new Label();
             buttonInput = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -337,6 +338,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(buttonInputManual);
             panel1.Controls.Add(buttonLogout);
             panel1.Controls.Add(buttonLaporan);
@@ -354,7 +356,7 @@
             buttonInputManual.ForeColor = Color.DarkRed;
             buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
             buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
-            buttonInputManual.Location = new Point(0, 313);
+            buttonInputManual.Location = new Point(0, 263);
             buttonInputManual.Name = "buttonInputManual";
             buttonInputManual.Size = new Size(144, 71);
             buttonInputManual.TabIndex = 18;
@@ -367,7 +369,7 @@
             buttonLogout.BackColor = Color.DarkRed;
             buttonLogout.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(9, 524);
+            buttonLogout.Location = new Point(10, 543);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Size = new Size(124, 49);
             buttonLogout.TabIndex = 17;
@@ -380,7 +382,7 @@
             buttonLaporan.ForeColor = Color.DarkRed;
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
-            buttonLaporan.Location = new Point(0, 428);
+            buttonLaporan.Location = new Point(0, 465);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Size = new Size(144, 71);
             buttonLaporan.TabIndex = 5;
@@ -394,7 +396,7 @@
             buttonJadwal.ForeColor = Color.DarkRed;
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
-            buttonJadwal.Location = new Point(0, 196);
+            buttonJadwal.Location = new Point(0, 161);
             buttonJadwal.Name = "buttonJadwal";
             buttonJadwal.Size = new Size(144, 75);
             buttonJadwal.TabIndex = 4;
@@ -419,13 +421,28 @@
             buttonInput.ForeColor = Color.DarkRed;
             buttonInput.Image = (Image)resources.GetObject("buttonInput.Image");
             buttonInput.ImageAlign = ContentAlignment.TopCenter;
-            buttonInput.Location = new Point(0, 84);
+            buttonInput.Location = new Point(0, 64);
             buttonInput.Name = "buttonInput";
             buttonInput.Size = new Size(144, 74);
             buttonInput.TabIndex = 0;
             buttonInput.Text = "Input Data Pasien";
             buttonInput.TextAlign = ContentAlignment.BottomCenter;
             buttonInput.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Century", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.DarkRed;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.ImageAlign = ContentAlignment.TopCenter;
+            button1.Location = new Point(0, 363);
+            button1.Name = "button1";
+            button1.Size = new Size(144, 70);
+            button1.TabIndex = 19;
+            button1.Text = "Grafik";
+            button1.TextAlign = ContentAlignment.BottomCenter;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // InputData
             // 
@@ -507,5 +524,6 @@
         private Button buttonJadwal;
         private Label label1;
         private Button buttonInput;
+        private Button button1;
     }
 }

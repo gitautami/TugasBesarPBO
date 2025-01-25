@@ -54,7 +54,6 @@
             dateTimePickerSampai = new DateTimePicker();
             label12 = new Label();
             panel1 = new Panel();
-            button1 = new Button();
             buttonInputManual = new Button();
             buttonLogout = new Button();
             buttonLaporan = new Button();
@@ -293,31 +292,16 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(buttonInputManual);
             panel1.Controls.Add(buttonLogout);
             panel1.Controls.Add(buttonLaporan);
             panel1.Controls.Add(buttonJadwal);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(buttonInput);
-            panel1.Location = new Point(0, 2);
+            panel1.Location = new Point(1, 1);
             panel1.Name = "panel1";
             panel1.Size = new Size(144, 612);
             panel1.TabIndex = 54;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Century", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.DarkRed;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.ImageAlign = ContentAlignment.TopCenter;
-            button1.Location = new Point(0, 363);
-            button1.Name = "button1";
-            button1.Size = new Size(144, 70);
-            button1.TabIndex = 19;
-            button1.Text = "Grafik";
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.UseVisualStyleBackColor = true;
             // 
             // buttonInputManual
             // 
@@ -325,7 +309,7 @@
             buttonInputManual.ForeColor = Color.DarkRed;
             buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
             buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
-            buttonInputManual.Location = new Point(0, 263);
+            buttonInputManual.Location = new Point(0, 289);
             buttonInputManual.Name = "buttonInputManual";
             buttonInputManual.Size = new Size(144, 71);
             buttonInputManual.TabIndex = 18;
@@ -338,7 +322,7 @@
             buttonLogout.BackColor = Color.DarkRed;
             buttonLogout.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(10, 543);
+            buttonLogout.Location = new Point(10, 518);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Size = new Size(124, 49);
             buttonLogout.TabIndex = 17;
@@ -351,7 +335,7 @@
             buttonLaporan.ForeColor = Color.DarkRed;
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
-            buttonLaporan.Location = new Point(0, 465);
+            buttonLaporan.Location = new Point(0, 403);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Size = new Size(144, 71);
             buttonLaporan.TabIndex = 5;
@@ -365,7 +349,7 @@
             buttonJadwal.ForeColor = Color.DarkRed;
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
-            buttonJadwal.Location = new Point(0, 161);
+            buttonJadwal.Location = new Point(0, 176);
             buttonJadwal.Name = "buttonJadwal";
             buttonJadwal.Size = new Size(144, 75);
             buttonJadwal.TabIndex = 4;
@@ -463,7 +447,6 @@
         private DateTimePicker dateTimePickerSampai;
         private Label label12;
         private Panel panel1;
-        private Button button1;
         private Button buttonInputManual;
         private Button buttonLogout;
         private Button buttonLaporan;

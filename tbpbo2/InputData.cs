@@ -71,9 +71,17 @@ namespace tbpbo2
             }
                     }
         };
+                // Simpan data ke MongoDB
                 collection.InsertOne(data);
+
+                // Tampilkan pesan berhasil
                 MessageBox.Show("Data pasien berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Reset form
                 ResetForm();
+
+                // Muat ulang data ke DataGridView
+                LoadDataToGridView();
             }
             catch (Exception ex)
             {
@@ -100,16 +108,105 @@ namespace tbpbo2
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBoxNama.Text) || comboBoxJenis.SelectedIndex == -1 || string.IsNullOrEmpty(textBoxNomorTLP.Text))
             {
-                MessageBox.Show("Nama Pasien, Jenis Kelamin, dan Nomor Telepon wajib diisi.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                try
+                {
+                    // Pastikan baris dipilih di DataGridView
+                    if (dataGridView1.SelectedRows.Count == 0)
+                    {
+                        MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Ambil baris yang dipilih
+                    var selectedRow = dataGridView1.SelectedRows[0];
+
+                    // Isi form dengan data dari DataGridView
+                    textBoxNama.Text = selectedRow.Cells["Nama Pasien"].Value.ToString();
+                    dateTimePickerTTL.Value = DateTime.Parse(selectedRow.Cells["Tanggal Lahir"].Value.ToString());
+                    comboBoxJenis.Text = selectedRow.Cells["Jenis Kelamin"].Value.ToString();
+                    textBoxNomorTLP.Text = selectedRow.Cells["Nomor Telepon"].Value.ToString();
+                    textBoxAlamat.Text = selectedRow.Cells["Alamat"].Value.ToString();
+                    comboBoxGolongan.Text = selectedRow.Cells["Golongan Darah"].Value.ToString();
+                    textBoxRiwayat.Text = selectedRow.Cells["Riwayat Penyakit"].Value.ToString();
+                    textBoxAlergi.Text = selectedRow.Cells["Alergi"].Value.ToString();
+                    textBoxNamaDarurat.Text = selectedRow.Cells["Kontak Darurat (Nama)"].Value.ToString();
+                    textBoxNomorDarurat.Text = selectedRow.Cells["Kontak Darurat (Nomor)"].Value.ToString();
+                    textBoxHubunganDarurat.Text = selectedRow.Cells["Kontak Darurat (Hubungan)"].Value.ToString();
+
+                    MessageBox.Show("Data berhasil dimuat ke form. Silakan edit data, lalu simpan perubahan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Terjadi kesalahan saat memuat data ke form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
+        private void LoadDataToGridView()
+        {
             try
             {
-                // Filter berdasarkan Nama Pasien (atau gunakan ID jika tersedia)
-                var filter = Builders<BsonDocument>.Filter.Eq("NamaPasien", textBoxNama.Text);
+                var documents = collection.Find(new BsonDocument()).ToList();
+                var dataTable = new DataTable();
+
+                dataTable.Columns.Add("_id", typeof(string)); // Tambahkan kolom ID
+                dataTable.Columns.Add("Nama Pasien");
+                dataTable.Columns.Add("Tanggal Lahir");
+                dataTable.Columns.Add("Jenis Kelamin");
+                dataTable.Columns.Add("Nomor Telepon");
+                dataTable.Columns.Add("Alamat");
+                dataTable.Columns.Add("Golongan Darah");
+                dataTable.Columns.Add("Riwayat Penyakit");
+                dataTable.Columns.Add("Alergi");
+                dataTable.Columns.Add("Kontak Darurat (Nama)");
+                dataTable.Columns.Add("Kontak Darurat (Nomor)");
+                dataTable.Columns.Add("Kontak Darurat (Hubungan)");
+
+                foreach (var doc in documents)
+                {
+                    var kontakDarurat = doc["KontakDarurat"].AsBsonDocument;
+                    dataTable.Rows.Add(
+                        doc["_id"].ToString(), // Ambil _id dari MongoDB
+                        doc["NamaPasien"].ToString(),
+                        doc["TanggalLahir"].ToUniversalTime().ToString("yyyy-MM-dd"),
+                        doc["JenisKelamin"].ToString(),
+                        doc["NomorTelepon"].ToString(),
+                        doc["Alamat"].ToString(),
+                        doc["GolonganDarah"].ToString(),
+                        doc["RiwayatPenyakit"].ToString(),
+                        doc["Alergi"].ToString(),
+                        kontakDarurat["Nama"].ToString(),
+                        kontakDarurat["NomorTelepon"].ToString(),
+                        kontakDarurat["Hubungan"].ToString()
+                    );
+                }
+
+                dataGridView1.DataSource = dataTable;
+                dataGridView1.Columns["_id"].Visible = false; // Sembunyikan kolom ID
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memuat data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonSimpanEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Pastikan baris dipilih di DataGridView
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Ambil _id dari baris yang dipilih
+                var selectedRow = dataGridView1.SelectedRows[0];
+                var id = selectedRow.Cells["_id"].Value.ToString();
+
+                // Filter berdasarkan _id
+                var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
 
                 // Perbarui data berdasarkan input pengguna
                 var update = Builders<BsonDocument>.Update
@@ -135,6 +232,11 @@ namespace tbpbo2
                 if (result.ModifiedCount > 0)
                 {
                     MessageBox.Show("Data pasien berhasil diperbarui!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Muat ulang data ke DataGridView
+                    LoadDataToGridView();
+
+                    // Reset form
                     ResetForm();
                 }
                 else
@@ -147,56 +249,5 @@ namespace tbpbo2
                 MessageBox.Show($"Terjadi kesalahan saat mengedit data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void LoadDataToGridView()
-        {
-            try
-            {
-                // Ambil semua dokumen dari koleksi MongoDB
-                var documents = collection.Find(new BsonDocument()).ToList();
-
-                // Buat DataTable untuk menyimpan data yang akan ditampilkan
-                var dataTable = new DataTable();
-
-                // Tambahkan kolom ke DataTable sesuai field di dokumen MongoDB
-                dataTable.Columns.Add("Nama Pasien");
-                dataTable.Columns.Add("Tanggal Lahir");
-                dataTable.Columns.Add("Jenis Kelamin");
-                dataTable.Columns.Add("Nomor Telepon");
-                dataTable.Columns.Add("Alamat");
-                dataTable.Columns.Add("Golongan Darah");
-                dataTable.Columns.Add("Riwayat Penyakit");
-                dataTable.Columns.Add("Alergi");
-                dataTable.Columns.Add("Kontak Darurat (Nama)");
-                dataTable.Columns.Add("Kontak Darurat (Nomor)");
-                dataTable.Columns.Add("Kontak Darurat (Hubungan)");
-
-                // Iterasi setiap dokumen untuk mengisi data ke dalam DataTable
-                foreach (var doc in documents)
-                {
-                    var kontakDarurat = doc["KontakDarurat"].AsBsonDocument; // Ambil subdokumen Kontak Darurat
-                    dataTable.Rows.Add(
-                        doc["NamaPasien"].ToString(),
-                        doc["TanggalLahir"].ToUniversalTime().ToString("yyyy-MM-dd"),
-                        doc["JenisKelamin"].ToString(),
-                        doc["NomorTelepon"].ToString(),
-                        doc["Alamat"].ToString(),
-                        doc["GolonganDarah"].ToString(),
-                        doc["RiwayatPenyakit"].ToString(),
-                        doc["Alergi"].ToString(),
-                        kontakDarurat["Nama"].ToString(),
-                        kontakDarurat["NomorTelepon"].ToString(),
-                        kontakDarurat["Hubungan"].ToString()
-                    );
-                }
-
-                // Tampilkan DataTable ke DataGridView
-                dataGridView1.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Terjadi kesalahan saat memuat data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
     }
 }

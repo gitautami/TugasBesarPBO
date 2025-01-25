@@ -55,7 +55,7 @@
             textBoxHubunganDarurat = new TextBox();
             label15 = new Label();
             buttonSimpan = new Button();
-            buttonEdit = new Button();
+            buttonEditData = new Button();
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             buttonInputManual = new Button();
@@ -64,6 +64,7 @@
             buttonJadwal = new Button();
             label1 = new Label();
             buttonInput = new Button();
+            buttonSimpanEdit = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -318,18 +319,18 @@
             buttonSimpan.UseVisualStyleBackColor = false;
             buttonSimpan.Click += buttonSimpan_Click;
             // 
-            // buttonEdit
+            // buttonEditData
             // 
-            buttonEdit.BackColor = Color.DarkRed;
-            buttonEdit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonEdit.ForeColor = Color.White;
-            buttonEdit.Location = new Point(345, 565);
-            buttonEdit.Name = "buttonEdit";
-            buttonEdit.Size = new Size(114, 36);
-            buttonEdit.TabIndex = 41;
-            buttonEdit.Text = "Edit";
-            buttonEdit.UseVisualStyleBackColor = false;
-            buttonEdit.Click += buttonEdit_Click;
+            buttonEditData.BackColor = Color.DarkRed;
+            buttonEditData.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonEditData.ForeColor = Color.White;
+            buttonEditData.Location = new Point(345, 565);
+            buttonEditData.Name = "buttonEditData";
+            buttonEditData.Size = new Size(114, 36);
+            buttonEditData.TabIndex = 41;
+            buttonEditData.Text = "Edit Data";
+            buttonEditData.UseVisualStyleBackColor = false;
+            buttonEditData.Click += buttonEdit_Click;
             // 
             // dataGridView1
             // 
@@ -432,14 +433,28 @@
             buttonInput.TextAlign = ContentAlignment.BottomCenter;
             buttonInput.UseVisualStyleBackColor = true;
             // 
+            // buttonSimpanEdit
+            // 
+            buttonSimpanEdit.BackColor = Color.DarkRed;
+            buttonSimpanEdit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonSimpanEdit.ForeColor = Color.White;
+            buttonSimpanEdit.Location = new Point(487, 565);
+            buttonSimpanEdit.Name = "buttonSimpanEdit";
+            buttonSimpanEdit.Size = new Size(132, 36);
+            buttonSimpanEdit.TabIndex = 44;
+            buttonSimpanEdit.Text = "Simpan Edit ";
+            buttonSimpanEdit.UseVisualStyleBackColor = false;
+            buttonSimpanEdit.Click += buttonSimpanEdit_Click;
+            // 
             // InputData
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1247, 613);
+            Controls.Add(buttonSimpanEdit);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
-            Controls.Add(buttonEdit);
+            Controls.Add(buttonEditData);
             Controls.Add(buttonSimpan);
             Controls.Add(textBoxHubunganDarurat);
             Controls.Add(label15);
@@ -503,7 +518,7 @@
         private TextBox textBoxHubunganDarurat;
         private Label label15;
         private Button buttonSimpan;
-        private Button buttonEdit;
+        private Button buttonEditData;
         private DataGridView dataGridView1;
         private Panel panel1;
         private Button buttonInputManual;
@@ -512,5 +527,6 @@
         private Button buttonJadwal;
         private Label label1;
         private Button buttonInput;
+        private Button buttonSimpanEdit;
     }
 }

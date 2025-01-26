@@ -34,21 +34,6 @@ namespace tbpbo2
             collection = database.GetCollection<BsonDocument>("monitoring");
         }
 
-        private void InputData_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonSimpan_Click(object sender, EventArgs e)
         {
             try
@@ -108,39 +93,39 @@ namespace tbpbo2
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                // Pastikan baris dipilih di DataGridView
+                if (dataGridView1.SelectedRows.Count == 0)
                 {
-                    // Pastikan baris dipilih di DataGridView
-                    if (dataGridView1.SelectedRows.Count == 0)
-                    {
-                        MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    // Ambil baris yang dipilih
-                    var selectedRow = dataGridView1.SelectedRows[0];
-
-                    // Isi form dengan data dari DataGridView
-                    textBoxNama.Text = selectedRow.Cells["Nama Pasien"].Value.ToString();
-                    dateTimePickerTTL.Value = DateTime.Parse(selectedRow.Cells["Tanggal Lahir"].Value.ToString());
-                    comboBoxJenis.Text = selectedRow.Cells["Jenis Kelamin"].Value.ToString();
-                    textBoxNomorTLP.Text = selectedRow.Cells["Nomor Telepon"].Value.ToString();
-                    textBoxAlamat.Text = selectedRow.Cells["Alamat"].Value.ToString();
-                    comboBoxGolongan.Text = selectedRow.Cells["Golongan Darah"].Value.ToString();
-                    textBoxRiwayat.Text = selectedRow.Cells["Riwayat Penyakit"].Value.ToString();
-                    textBoxAlergi.Text = selectedRow.Cells["Alergi"].Value.ToString();
-                    textBoxNamaDarurat.Text = selectedRow.Cells["Kontak Darurat (Nama)"].Value.ToString();
-                    textBoxNomorDarurat.Text = selectedRow.Cells["Kontak Darurat (Nomor)"].Value.ToString();
-                    textBoxHubunganDarurat.Text = selectedRow.Cells["Kontak Darurat (Hubungan)"].Value.ToString();
-
-                    MessageBox.Show("Data berhasil dimuat ke form. Silakan edit data, lalu simpan perubahan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Terjadi kesalahan saat memuat data ke form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                // Ambil baris yang dipilih
+                var selectedRow = dataGridView1.SelectedRows[0];
+
+                // Isi form dengan data dari DataGridView
+                textBoxNama.Text = selectedRow.Cells["Nama Pasien"].Value.ToString();
+                dateTimePickerTTL.Value = DateTime.Parse(selectedRow.Cells["Tanggal Lahir"].Value.ToString());
+                comboBoxJenis.Text = selectedRow.Cells["Jenis Kelamin"].Value.ToString();
+                textBoxNomorTLP.Text = selectedRow.Cells["Nomor Telepon"].Value.ToString();
+                textBoxAlamat.Text = selectedRow.Cells["Alamat"].Value.ToString();
+                comboBoxGolongan.Text = selectedRow.Cells["Golongan Darah"].Value.ToString();
+                textBoxRiwayat.Text = selectedRow.Cells["Riwayat Penyakit"].Value.ToString();
+                textBoxAlergi.Text = selectedRow.Cells["Alergi"].Value.ToString();
+                textBoxNamaDarurat.Text = selectedRow.Cells["Kontak Darurat (Nama)"].Value.ToString();
+                textBoxNomorDarurat.Text = selectedRow.Cells["Kontak Darurat (Nomor)"].Value.ToString();
+                textBoxHubunganDarurat.Text = selectedRow.Cells["Kontak Darurat (Hubungan)"].Value.ToString();
+
+                MessageBox.Show("Data berhasil dimuat ke form. Silakan edit data, lalu simpan perubahan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memuat data ke form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void LoadDataToGridView()
         {
@@ -248,6 +233,13 @@ namespace tbpbo2
             {
                 MessageBox.Show($"Terjadi kesalahan saat mengedit data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonJadwal_Click(object sender, EventArgs e)
+        {
+            Jadwal formJadwal = new Jadwal();
+            formJadwal.Show();
+            this.Hide();
         }
     }
 }

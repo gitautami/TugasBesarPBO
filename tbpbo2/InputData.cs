@@ -35,21 +35,6 @@ namespace tbpbo2
             collection = database.GetCollection<BsonDocument>("monitoring");
         }
 
-        private void InputData_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonSimpan_Click(object sender, EventArgs e)
         {
             try
@@ -249,6 +234,13 @@ namespace tbpbo2
             {
                 MessageBox.Show($"Terjadi kesalahan saat mengedit data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonJadwal_Click(object sender, EventArgs e)
+        {
+            Jadwal formJadwal = new Jadwal();
+            formJadwal.Show();
+            this.Hide();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)

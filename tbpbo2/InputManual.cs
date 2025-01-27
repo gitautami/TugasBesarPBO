@@ -231,5 +231,19 @@ namespace tbpbo2
                 MessageBox.Show($"Kesalahan saat memfilter: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonJadwal_Click(object sender, EventArgs e)
+        {
+            Jadwal formJadwal = new Jadwal();
+            formJadwal.Show();
+            this.Hide();
+        }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+            Laporan formLaporan = new Laporan();
+            formLaporan.Show();
+            this.Hide();
+        }
     }
 }

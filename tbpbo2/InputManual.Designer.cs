@@ -372,6 +372,7 @@
             buttonLaporan.Text = "Laporan Kesehatan";
             buttonLaporan.TextAlign = ContentAlignment.BottomCenter;
             buttonLaporan.UseVisualStyleBackColor = true;
+            buttonLaporan.Click += buttonLaporan_Click;
             // 
             // buttonJadwal
             // 
@@ -387,6 +388,7 @@
             buttonJadwal.Text = "Jadwal Kunjungan";
             buttonJadwal.TextAlign = ContentAlignment.BottomCenter;
             buttonJadwal.UseVisualStyleBackColor = true;
+            buttonJadwal.Click += buttonJadwal_Click;
             // 
             // label1
             // 

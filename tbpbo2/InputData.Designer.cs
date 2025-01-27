@@ -409,6 +409,7 @@
             buttonLogout.TabIndex = 17;
             buttonLogout.Text = "Logout";
             buttonLogout.UseVisualStyleBackColor = false;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // buttonLaporan
             // 

@@ -10,6 +10,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace tbpbo2
 {
@@ -239,6 +240,13 @@ namespace tbpbo2
         {
             Jadwal formJadwal = new Jadwal();
             formJadwal.Show();
+            this.Hide();
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            login loginForm = new login();
+            loginForm.Show();
             this.Hide();
         }
     }

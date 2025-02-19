@@ -20,6 +20,8 @@ namespace tbpbo2
             InitializeComponent();
             InitializeDataTable();
             InitializeMongoDB();
+            LoadPatientNames(); // Mengisi daftar nama pasien di comboBoxPasien
+            LoadDataFromMongoDB(); // Memuat data vital pasien ke DataGridView
         }
 
         // Koneksi ke MongoDB
@@ -31,28 +33,11 @@ namespace tbpbo2
             collection = database.GetCollection<BsonDocument>("pasien");
         }
 
-        // Event handler ketika form dimuat
-        private void InputManual_Load(object sender, EventArgs e)
-        {
-            comboBoxPasien.Items.Add("Pasien 1");
-            comboBoxPasien.Items.Add("Pasien 2");
-            comboBoxPasien.Items.Add("Pasien 3");
-
-            dataGridView1.DataSource = dataTable;
-            LoadDataFromMongoDB();
-
-            var uniqueNames = dataTable.AsEnumerable()
-                                       .Select(row => row.Field<string>("Nama Pasien"))
-                                       .Distinct()
-                                       .ToList();
-            comboBoxFilterPasien.Items.AddRange(uniqueNames.ToArray());
-        }
-
         // Inisialisasi DataTable
         private void InitializeDataTable()
         {
             dataTable = new DataTable();
-            dataTable.Columns.Add("Id", typeof(string)); // Tambahan untuk menyimpan ID
+            dataTable.Columns.Add("Id", typeof(string));
             dataTable.Columns.Add("Nama Pasien", typeof(string));
             dataTable.Columns.Add("Tekanan Darah", typeof(string));
             dataTable.Columns.Add("Denyut Jantung", typeof(string));
@@ -60,6 +45,29 @@ namespace tbpbo2
             dataTable.Columns.Add("Berat Badan", typeof(string));
             dataTable.Columns.Add("Tanggal Pencatatan", typeof(DateTime));
             dataTable.Columns.Add("Catatan Tambahan", typeof(string));
+
+            dataGridView1.DataSource = dataTable;
+        }
+
+        // Mengisi comboBoxPasien dengan daftar nama pasien dari database
+        private void LoadPatientNames()
+        {
+            try
+            {
+                comboBoxPasien.Items.Clear();
+
+                var documents = collection.Find(new BsonDocument()).ToList();
+                var uniqueNames = documents
+                    .Select(doc => doc["Nama Pasien"].AsString)
+                    .Distinct()
+                    .ToList();
+
+                comboBoxPasien.Items.AddRange(uniqueNames.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Kesalahan saat mengambil nama pasien: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Fungsi untuk memuat data dari MongoDB ke DataTable
@@ -105,7 +113,7 @@ namespace tbpbo2
                     return;
                 }
 
-                if (selectedDocumentId != ObjectId.Empty)
+                if (selectedDocumentId != ObjectId.Empty) // Jika sedang mengedit data
                 {
                     var filter = Builders<BsonDocument>.Filter.Eq("_id", selectedDocumentId);
                     var update = Builders<BsonDocument>.Update
@@ -119,47 +127,29 @@ namespace tbpbo2
 
                     collection.UpdateOne(filter, update);
 
-                    var selectedRow = dataGridView1.SelectedRows[0];
-                    selectedRow.Cells["Nama Pasien"].Value = comboBoxPasien.Text;
-                    selectedRow.Cells["Tekanan Darah"].Value = textBoxTekanan.Text;
-                    selectedRow.Cells["Denyut Jantung"].Value = textBoxDenyut.Text;
-                    selectedRow.Cells["Suhu Tubuh"].Value = textBoxSuhu.Text;
-                    selectedRow.Cells["Berat Badan"].Value = textBoxBerat.Text;
-                    selectedRow.Cells["Tanggal Pencatatan"].Value = dateTimePickerPencatatan.Value;
-                    selectedRow.Cells["Catatan Tambahan"].Value = textBoxCatatan.Text;
-
-                    MessageBox.Show("Data berhasil diperbarui.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Data berhasil diperbarui!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
+                else // Jika sedang menambah data baru
                 {
                     var document = new BsonDocument
-                    {
-                        { "Nama Pasien", comboBoxPasien.Text },
-                        { "Tekanan Darah", textBoxTekanan.Text },
-                        { "Denyut Jantung", textBoxDenyut.Text },
-                        { "Suhu Tubuh", textBoxSuhu.Text },
-                        { "Berat Badan", textBoxBerat.Text },
-                        { "Tanggal Pencatatan", dateTimePickerPencatatan.Value },
-                        { "Catatan Tambahan", textBoxCatatan.Text }
-                    };
+            {
+                { "Nama Pasien", comboBoxPasien.Text },
+                { "Tekanan Darah", textBoxTekanan.Text },
+                { "Denyut Jantung", textBoxDenyut.Text },
+                { "Suhu Tubuh", textBoxSuhu.Text },
+                { "Berat Badan", textBoxBerat.Text },
+                { "Tanggal Pencatatan", dateTimePickerPencatatan.Value },
+                { "Catatan Tambahan", textBoxCatatan.Text }
+            };
 
                     collection.InsertOne(document);
-                    dataTable.Rows.Add(
-                        document["_id"].ToString(),
-                        comboBoxPasien.Text,
-                        textBoxTekanan.Text,
-                        textBoxDenyut.Text,
-                        textBoxSuhu.Text,
-                        textBoxBerat.Text,
-                        dateTimePickerPencatatan.Value,
-                        textBoxCatatan.Text
-                    );
-
-                    MessageBox.Show("Data berhasil disimpan ke MongoDB.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Data berhasil disimpan ke MongoDB!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                ClearForm();
-                selectedDocumentId = ObjectId.Empty;
+                LoadPatientNames(); // Update daftar pasien di comboBox
+                LoadDataFromMongoDB(); // Refresh DataGridView setelah update
+                ClearForm(); // Reset form setelah simpan/edit
+                selectedDocumentId = ObjectId.Empty; // Reset ID setelah menyimpan
             }
             catch (Exception ex)
             {
@@ -167,7 +157,6 @@ namespace tbpbo2
             }
         }
 
-        // Fungsi untuk membersihkan form
         private void ClearForm()
         {
             comboBoxPasien.SelectedIndex = -1;
@@ -179,29 +168,43 @@ namespace tbpbo2
             dateTimePickerPencatatan.Value = DateTime.Now;
         }
 
-        // Tombol Edit
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             try
             {
+                // Pastikan baris dipilih di DataGridView
                 if (dataGridView1.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                // Ambil baris yang dipilih
                 var selectedRow = dataGridView1.SelectedRows[0];
+
+                // Simpan ID dari dokumen yang akan diedit
                 selectedDocumentId = ObjectId.Parse(selectedRow.Cells["Id"].Value.ToString());
 
-                comboBoxPasien.Text = selectedRow.Cells["Nama Pasien"].Value.ToString();
-                textBoxTekanan.Text = selectedRow.Cells["Tekanan Darah"].Value.ToString();
-                textBoxDenyut.Text = selectedRow.Cells["Denyut Jantung"].Value.ToString();
-                textBoxSuhu.Text = selectedRow.Cells["Suhu Tubuh"].Value.ToString();
-                textBoxBerat.Text = selectedRow.Cells["Berat Badan"].Value.ToString();
-                dateTimePickerPencatatan.Value = DateTime.Parse(selectedRow.Cells["Tanggal Pencatatan"].Value.ToString());
-                textBoxCatatan.Text = selectedRow.Cells["Catatan Tambahan"].Value.ToString();
+                // Isi form dengan data dari DataGridView, cek null agar tidak error
+                comboBoxPasien.Text = selectedRow.Cells["Nama Pasien"].Value?.ToString() ?? "";
+                textBoxTekanan.Text = selectedRow.Cells["Tekanan Darah"].Value?.ToString() ?? "";
+                textBoxDenyut.Text = selectedRow.Cells["Denyut Jantung"].Value?.ToString() ?? "";
+                textBoxSuhu.Text = selectedRow.Cells["Suhu Tubuh"].Value?.ToString() ?? "";
+                textBoxBerat.Text = selectedRow.Cells["Berat Badan"].Value?.ToString() ?? "";
 
-                MessageBox.Show("Data berhasil dimuat ke form. Silakan edit data, lalu klik tombol Simpan untuk memperbarui.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Konversi tanggal dengan pengecekan null
+                if (DateTime.TryParse(selectedRow.Cells["Tanggal Pencatatan"].Value?.ToString(), out DateTime parsedDate))
+                {
+                    dateTimePickerPencatatan.Value = parsedDate;
+                }
+                else
+                {
+                    dateTimePickerPencatatan.Value = DateTime.Now; // Default jika parsing gagal
+                }
+
+                textBoxCatatan.Text = selectedRow.Cells["Catatan Tambahan"].Value?.ToString() ?? "";
+
+                MessageBox.Show("Data berhasil dimuat ke form. Silakan edit lalu simpan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -209,41 +212,51 @@ namespace tbpbo2
             }
         }
 
-        // Filter nama pasien
-        private void comboBoxFilterPasien_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonHapus_Click(object sender, EventArgs e)
         {
             try
             {
-                string selectedFilter = comboBoxFilterPasien.Text;
+                // Pastikan ada baris yang dipilih di DataGridView
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Pilih data yang ingin dihapus.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                if (string.IsNullOrEmpty(selectedFilter))
+                // Konfirmasi penghapusan data
+                DialogResult result = MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?",
+                    "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No)
+                    return;
+
+                // Ambil baris yang dipilih
+                var selectedRow = dataGridView1.SelectedRows[0];
+                string idString = selectedRow.Cells["Id"].Value?.ToString();
+
+                if (!ObjectId.TryParse(idString, out ObjectId id))
                 {
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                    MessageBox.Show("ID data tidak valid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
-                {
-                    string filterExpression = $"[Nama Pasien] LIKE '%{selectedFilter}%'";
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterExpression;
-                }
+
+                // Filter untuk menghapus data berdasarkan ID
+                var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+                collection.DeleteOne(filter);
+
+                // Hapus dari DataTable (DataGridView)
+                dataTable.Rows.RemoveAt(selectedRow.Index);
+
+                MessageBox.Show("Data berhasil dihapus!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Perbarui daftar pasien di comboBox
+                LoadPatientNames();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Kesalahan saat memfilter: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Terjadi kesalahan saat menghapus data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void buttonJadwal_Click(object sender, EventArgs e)
-        {
-            Jadwal formJadwal = new Jadwal();
-            formJadwal.Show();
-            this.Hide();
-        }
-
-        private void buttonLaporan_Click(object sender, EventArgs e)
-        {
-            Laporan formLaporan = new Laporan();
-            formLaporan.Show();
-            this.Hide();
-        }
     }
 }

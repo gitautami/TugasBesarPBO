@@ -87,5 +87,10 @@ namespace tbpbo2
 
             chart1.ChartAreas[0].RecalculateAxesScale();
         }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

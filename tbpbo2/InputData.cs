@@ -238,9 +238,9 @@ namespace tbpbo2
 
         private void buttonJadwal_Click(object sender, EventArgs e)
         {
-            //Jadwal formJadwal = new Jadwal();
-            //formJadwal.Show();
-            //this.Hide();
+            Jadwal formJadwal = new Jadwal();
+            formJadwal.Show();
+            this.Hide();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -249,5 +249,20 @@ namespace tbpbo2
             loginForm.Show();
             this.Hide();
         }
+
+        private void buttonInputManual_Click(object sender, EventArgs e)
+        {
+            InputManual formInputManual = new InputManual();
+            formInputManual.Show();
+            this.Hide();
+        }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+            Laporan formLaporan = new Laporan();
+            formLaporan.Show();
+            this.Hide();
+        }
+    
     }
 }

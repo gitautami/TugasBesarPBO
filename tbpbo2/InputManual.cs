@@ -258,5 +258,25 @@ namespace tbpbo2
             }
         }
 
+        private void buttonInput_Click(object sender, EventArgs e)
+        {
+            InputData formInputData = new InputData();
+            formInputData.Show();
+            this.Hide();
+        }
+
+        private void buttonJadwal_Click(object sender, EventArgs e)
+        {
+            Jadwal formJadwal = new Jadwal();
+            formJadwal.Show();
+            this.Hide();
+        }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+            Laporan formLaporan = new Laporan();
+            formLaporan.Show();
+            this.Hide();
+        }
     }
 }

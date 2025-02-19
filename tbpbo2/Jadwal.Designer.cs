@@ -56,6 +56,7 @@
             buttonInput = new Button();
             timerKunjungan = new System.Windows.Forms.Timer(components);
             buttonSimpanEdit = new Button();
+            buttonHapus = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewKunjungan).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -201,7 +202,7 @@
             buttonEdit.BackColor = Color.DarkRed;
             buttonEdit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonEdit.ForeColor = Color.White;
-            buttonEdit.Location = new Point(405, 472);
+            buttonEdit.Location = new Point(369, 472);
             buttonEdit.Margin = new Padding(4);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(142, 45);
@@ -215,7 +216,7 @@
             buttonSimpan.BackColor = Color.DarkRed;
             buttonSimpan.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonSimpan.ForeColor = Color.White;
-            buttonSimpan.Location = new Point(235, 472);
+            buttonSimpan.Location = new Point(203, 472);
             buttonSimpan.Margin = new Padding(4);
             buttonSimpan.Name = "buttonSimpan";
             buttonSimpan.Size = new Size(142, 45);
@@ -274,6 +275,7 @@
             buttonInputManual.Text = "Input Manual Kondisi Kesehatan";
             buttonInputManual.TextAlign = ContentAlignment.BottomCenter;
             buttonInputManual.UseVisualStyleBackColor = true;
+            buttonInputManual.Click += buttonInputManual_Click;
             // 
             // buttonLogout
             // 
@@ -302,6 +304,7 @@
             buttonLaporan.Text = "Laporan Kesehatan";
             buttonLaporan.TextAlign = ContentAlignment.BottomCenter;
             buttonLaporan.UseVisualStyleBackColor = true;
+            buttonLaporan.Click += buttonLaporan_Click;
             // 
             // buttonJadwal
             // 
@@ -344,6 +347,7 @@
             buttonInput.Text = "Input Data Pasien";
             buttonInput.TextAlign = ContentAlignment.BottomCenter;
             buttonInput.UseVisualStyleBackColor = true;
+            buttonInput.Click += buttonInput_Click;
             // 
             // timerKunjungan
             // 
@@ -356,7 +360,7 @@
             buttonSimpanEdit.BackColor = Color.DarkRed;
             buttonSimpanEdit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonSimpanEdit.ForeColor = Color.White;
-            buttonSimpanEdit.Location = new Point(578, 472);
+            buttonSimpanEdit.Location = new Point(536, 472);
             buttonSimpanEdit.Margin = new Padding(4);
             buttonSimpanEdit.Name = "buttonSimpanEdit";
             buttonSimpanEdit.Size = new Size(142, 45);
@@ -365,11 +369,26 @@
             buttonSimpanEdit.UseVisualStyleBackColor = false;
             buttonSimpanEdit.Click += buttonSimpanEdit_Click;
             // 
+            // buttonHapus
+            // 
+            buttonHapus.BackColor = Color.DarkRed;
+            buttonHapus.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonHapus.ForeColor = Color.White;
+            buttonHapus.Location = new Point(369, 548);
+            buttonHapus.Margin = new Padding(4);
+            buttonHapus.Name = "buttonHapus";
+            buttonHapus.Size = new Size(142, 45);
+            buttonHapus.TabIndex = 48;
+            buttonHapus.Text = "Hapus";
+            buttonHapus.UseVisualStyleBackColor = false;
+            buttonHapus.Click += buttonHapus_Click;
+            // 
             // Jadwal
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1559, 766);
+            Controls.Add(buttonHapus);
             Controls.Add(buttonSimpanEdit);
             Controls.Add(panel1);
             Controls.Add(label9);
@@ -426,5 +445,6 @@
         private Button buttonInput;
         private System.Windows.Forms.Timer timerKunjungan;
         private Button buttonSimpanEdit;
+        private Button buttonHapus;
     }
 }

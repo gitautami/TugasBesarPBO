@@ -21,8 +21,8 @@ namespace tbpbo2
         {
             InitializeComponent();
             InitializeMongoDB();
-            LoadComboBoxData();
             LoadDataGridView();
+            LoadComboBoxData();
 
             timerKunjungan.Tick += timerKunjungan_Tick_1;
             timerKunjungan.Start();
@@ -246,6 +246,85 @@ namespace tbpbo2
             dateTimePickerWaktu.Value = DateTime.Today;
             textBoxKeperluan.Clear();
             textBoxCatatan.Clear();
+        }
+
+        private void buttonHapus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewKunjungan.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Pilih data yang ingin dihapus.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi Hapus",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirmResult == DialogResult.No)
+                {
+                    return;
+                }
+
+                var selectedRow = dataGridViewKunjungan.SelectedRows[0];
+                var id = selectedRow.Cells["_id"].Value?.ToString();
+                Console.WriteLine("Selected ID: " + id);  // Debug
+
+                if (string.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("ID tidak valid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var jadwalCollection = _database.GetCollection<BsonDocument>("jadwalkunjungan");
+                FilterDefinition<BsonDocument> filter;
+
+                try
+                {
+                    filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(id));
+                }
+                catch (FormatException)
+                {
+                    filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+                }
+
+                var result = jadwalCollection.DeleteOne(filter);
+
+                if (result.DeletedCount > 0)
+                {
+                    MessageBox.Show("Data kunjungan pasien berhasil dihapus!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadDataGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Data tidak ditemukan atau ID salah format.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat menghapus data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonInput_Click(object sender, EventArgs e)
+        {
+            InputData formInputData = new InputData();
+            formInputData.Show();
+            this.Hide();
+        }
+
+        private void buttonInputManual_Click(object sender, EventArgs e)
+        {
+            InputManual formInputManual = new InputManual();
+            formInputManual.Show();
+            this.Hide();
+        }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+            Laporan formLaporan = new Laporan();
+            formLaporan.Show();
+            this.Hide();
         }
     }
 }

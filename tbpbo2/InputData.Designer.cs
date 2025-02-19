@@ -72,7 +72,7 @@
             // textBoxNama
             // 
             textBoxNama.Location = new Point(476, 75);
-            textBoxNama.Margin = new Padding(4, 4, 4, 4);
+            textBoxNama.Margin = new Padding(4);
             textBoxNama.Name = "textBoxNama";
             textBoxNama.Size = new Size(326, 31);
             textBoxNama.TabIndex = 18;
@@ -152,7 +152,7 @@
             // dateTimePickerTTL
             // 
             dateTimePickerTTL.Location = new Point(476, 122);
-            dateTimePickerTTL.Margin = new Padding(4, 4, 4, 4);
+            dateTimePickerTTL.Margin = new Padding(4);
             dateTimePickerTTL.Name = "dateTimePickerTTL";
             dateTimePickerTTL.Size = new Size(326, 31);
             dateTimePickerTTL.TabIndex = 23;
@@ -162,7 +162,7 @@
             comboBoxJenis.FormattingEnabled = true;
             comboBoxJenis.Items.AddRange(new object[] { "Laki-Laki", "Perempuan" });
             comboBoxJenis.Location = new Point(476, 172);
-            comboBoxJenis.Margin = new Padding(4, 4, 4, 4);
+            comboBoxJenis.Margin = new Padding(4);
             comboBoxJenis.Name = "comboBoxJenis";
             comboBoxJenis.Size = new Size(326, 33);
             comboBoxJenis.TabIndex = 24;
@@ -170,7 +170,7 @@
             // textBoxNomorTLP
             // 
             textBoxNomorTLP.Location = new Point(476, 220);
-            textBoxNomorTLP.Margin = new Padding(4, 4, 4, 4);
+            textBoxNomorTLP.Margin = new Padding(4);
             textBoxNomorTLP.Name = "textBoxNomorTLP";
             textBoxNomorTLP.Size = new Size(326, 31);
             textBoxNomorTLP.TabIndex = 25;
@@ -179,7 +179,7 @@
             // textBoxAlamat
             // 
             textBoxAlamat.Location = new Point(476, 261);
-            textBoxAlamat.Margin = new Padding(4, 4, 4, 4);
+            textBoxAlamat.Margin = new Padding(4);
             textBoxAlamat.Name = "textBoxAlamat";
             textBoxAlamat.Size = new Size(326, 31);
             textBoxAlamat.TabIndex = 26;
@@ -189,7 +189,7 @@
             comboBoxGolongan.FormattingEnabled = true;
             comboBoxGolongan.Items.AddRange(new object[] { "A", "B", "O", "AB" });
             comboBoxGolongan.Location = new Point(476, 305);
-            comboBoxGolongan.Margin = new Padding(4, 4, 4, 4);
+            comboBoxGolongan.Margin = new Padding(4);
             comboBoxGolongan.Name = "comboBoxGolongan";
             comboBoxGolongan.Size = new Size(326, 33);
             comboBoxGolongan.TabIndex = 27;
@@ -221,7 +221,7 @@
             // textBoxRiwayat
             // 
             textBoxRiwayat.Location = new Point(476, 401);
-            textBoxRiwayat.Margin = new Padding(4, 4, 4, 4);
+            textBoxRiwayat.Margin = new Padding(4);
             textBoxRiwayat.Name = "textBoxRiwayat";
             textBoxRiwayat.Size = new Size(326, 31);
             textBoxRiwayat.TabIndex = 30;
@@ -241,7 +241,7 @@
             // textBoxAlergi
             // 
             textBoxAlergi.Location = new Point(476, 454);
-            textBoxAlergi.Margin = new Padding(4, 4, 4, 4);
+            textBoxAlergi.Margin = new Padding(4);
             textBoxAlergi.Name = "textBoxAlergi";
             textBoxAlergi.Size = new Size(326, 31);
             textBoxAlergi.TabIndex = 33;
@@ -261,7 +261,7 @@
             // textBoxNomorDarurat
             // 
             textBoxNomorDarurat.Location = new Point(476, 596);
-            textBoxNomorDarurat.Margin = new Padding(4, 4, 4, 4);
+            textBoxNomorDarurat.Margin = new Padding(4);
             textBoxNomorDarurat.Name = "textBoxNomorDarurat";
             textBoxNomorDarurat.Size = new Size(326, 31);
             textBoxNomorDarurat.TabIndex = 38;
@@ -293,7 +293,7 @@
             // textBoxNamaDarurat
             // 
             textBoxNamaDarurat.Location = new Point(476, 550);
-            textBoxNamaDarurat.Margin = new Padding(4, 4, 4, 4);
+            textBoxNamaDarurat.Margin = new Padding(4);
             textBoxNamaDarurat.Name = "textBoxNamaDarurat";
             textBoxNamaDarurat.Size = new Size(326, 31);
             textBoxNamaDarurat.TabIndex = 35;
@@ -313,7 +313,7 @@
             // textBoxHubunganDarurat
             // 
             textBoxHubunganDarurat.Location = new Point(476, 642);
-            textBoxHubunganDarurat.Margin = new Padding(4, 4, 4, 4);
+            textBoxHubunganDarurat.Margin = new Padding(4);
             textBoxHubunganDarurat.Name = "textBoxHubunganDarurat";
             textBoxHubunganDarurat.Size = new Size(326, 31);
             textBoxHubunganDarurat.TabIndex = 40;
@@ -336,7 +336,7 @@
             buttonSimpan.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonSimpan.ForeColor = Color.White;
             buttonSimpan.Location = new Point(261, 706);
-            buttonSimpan.Margin = new Padding(4, 4, 4, 4);
+            buttonSimpan.Margin = new Padding(4);
             buttonSimpan.Name = "buttonSimpan";
             buttonSimpan.Size = new Size(142, 45);
             buttonSimpan.TabIndex = 18;
@@ -350,7 +350,7 @@
             buttonEditData.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonEditData.ForeColor = Color.White;
             buttonEditData.Location = new Point(431, 706);
-            buttonEditData.Margin = new Padding(4, 4, 4, 4);
+            buttonEditData.Margin = new Padding(4);
             buttonEditData.Name = "buttonEditData";
             buttonEditData.Size = new Size(142, 45);
             buttonEditData.TabIndex = 41;
@@ -362,7 +362,7 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(832, 80);
-            dataGridView1.Margin = new Padding(4, 4, 4, 4);
+            dataGridView1.Margin = new Padding(4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(711, 671);
@@ -377,7 +377,7 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(buttonInput);
             panel1.Location = new Point(2, 0);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(180, 765);
             panel1.TabIndex = 43;
@@ -389,13 +389,14 @@
             buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
             buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
             buttonInputManual.Location = new Point(0, 361);
-            buttonInputManual.Margin = new Padding(4, 4, 4, 4);
+            buttonInputManual.Margin = new Padding(4);
             buttonInputManual.Name = "buttonInputManual";
             buttonInputManual.Size = new Size(180, 89);
             buttonInputManual.TabIndex = 18;
             buttonInputManual.Text = "Input Manual Kondisi Kesehatan";
             buttonInputManual.TextAlign = ContentAlignment.BottomCenter;
             buttonInputManual.UseVisualStyleBackColor = true;
+            buttonInputManual.Click += buttonInputManual_Click;
             // 
             // buttonLogout
             // 
@@ -403,7 +404,7 @@
             buttonLogout.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogout.ForeColor = Color.White;
             buttonLogout.Location = new Point(12, 648);
-            buttonLogout.Margin = new Padding(4, 4, 4, 4);
+            buttonLogout.Margin = new Padding(4);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Size = new Size(155, 61);
             buttonLogout.TabIndex = 17;
@@ -418,13 +419,14 @@
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
             buttonLaporan.Location = new Point(0, 504);
-            buttonLaporan.Margin = new Padding(4, 4, 4, 4);
+            buttonLaporan.Margin = new Padding(4);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Size = new Size(180, 89);
             buttonLaporan.TabIndex = 5;
             buttonLaporan.Text = "Laporan Kesehatan";
             buttonLaporan.TextAlign = ContentAlignment.BottomCenter;
             buttonLaporan.UseVisualStyleBackColor = true;
+            buttonLaporan.Click += buttonLaporan_Click;
             // 
             // buttonJadwal
             // 
@@ -433,7 +435,7 @@
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
             buttonJadwal.Location = new Point(0, 220);
-            buttonJadwal.Margin = new Padding(4, 4, 4, 4);
+            buttonJadwal.Margin = new Padding(4);
             buttonJadwal.Name = "buttonJadwal";
             buttonJadwal.Size = new Size(180, 94);
             buttonJadwal.TabIndex = 4;
@@ -461,7 +463,7 @@
             buttonInput.Image = (Image)resources.GetObject("buttonInput.Image");
             buttonInput.ImageAlign = ContentAlignment.TopCenter;
             buttonInput.Location = new Point(0, 80);
-            buttonInput.Margin = new Padding(4, 4, 4, 4);
+            buttonInput.Margin = new Padding(4);
             buttonInput.Name = "buttonInput";
             buttonInput.Size = new Size(180, 92);
             buttonInput.TabIndex = 0;
@@ -475,7 +477,7 @@
             buttonSimpanEdit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonSimpanEdit.ForeColor = Color.White;
             buttonSimpanEdit.Location = new Point(609, 706);
-            buttonSimpanEdit.Margin = new Padding(4, 4, 4, 4);
+            buttonSimpanEdit.Margin = new Padding(4);
             buttonSimpanEdit.Name = "buttonSimpanEdit";
             buttonSimpanEdit.Size = new Size(165, 45);
             buttonSimpanEdit.TabIndex = 44;
@@ -518,7 +520,7 @@
             Controls.Add(textBoxNama);
             Controls.Add(label4);
             Controls.Add(label3);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "InputData";
             Text = "InputData";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

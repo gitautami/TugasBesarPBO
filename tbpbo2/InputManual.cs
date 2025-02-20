@@ -56,9 +56,13 @@ namespace tbpbo2
             {
                 comboBoxPasien.Items.Clear();
 
-                var documents = collection.Find(new BsonDocument()).ToList();
+                // Ubah nama koleksi jika daftar pasien disimpan di koleksi berbeda
+                var database = new MongoClient("mongodb://localhost:27017/").GetDatabase("tbpbo");
+                var pasienCollection = database.GetCollection<BsonDocument>("monitoring");
+
+                var documents = pasienCollection.Find(new BsonDocument()).ToList();
                 var uniqueNames = documents
-                    .Select(doc => doc["Nama Pasien"].AsString)
+                    .Select(doc => doc["NamaPasien"].AsString)
                     .Distinct()
                     .ToList();
 
@@ -69,6 +73,7 @@ namespace tbpbo2
                 MessageBox.Show($"Kesalahan saat mengambil nama pasien: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         // Fungsi untuk memuat data dari MongoDB ke DataTable
         private void LoadDataFromMongoDB()

@@ -17,36 +17,23 @@ namespace tbpbo2
 {
     public partial class Laporan : Form
     {
-        private IMongoCollection<BsonDocument> collection; // Tambahkan ini sebagai variabel global
-
         public Laporan()
         {
             InitializeComponent();
-            InitializeMongoDB();
         }
 
         private void InitializeMongoDB()
         {
+            // 1. Koneksi ke MongoDB
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("tbpbo");
-            collection = database.GetCollection<BsonDocument>("pasien"); // Simpan di variabel global
-        }
+            var collection = database.GetCollection<BsonDocument>("pasien");
 
-        private void Grafik_Load(object sender, EventArgs e)
-        {
-            if (collection == null)
-            {
-                MessageBox.Show("Gagal mengakses koleksi MongoDB.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            // 2. Query data pasien
+            var pasienData = collection.Find(new BsonDocument()).ToList();
 
-            try
-            {
-                // 2. Query data pasien
-                var pasienData = collection.Find(new BsonDocument()).ToList();
-
-                // 3. Siapkan data untuk grafik
-                chart1.Series.Clear(); // Hapus seri sebelumnya (jika ada)
+            // 3. Siapkan data untuk grafik
+            chart1.Series.Clear(); // Hapus seri sebelumnya (jika ada)
 
                 // Tambahkan seri untuk Sistolik
                 var sistolikSeries = new Series("Sistolik")

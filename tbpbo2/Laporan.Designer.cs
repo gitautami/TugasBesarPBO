@@ -68,7 +68,7 @@
             chart1.Size = new Size(701, 572);
             chart1.TabIndex = 45;
             chart1.Text = "chart1";
-            chart1.Click += chart1_Click;
+            //chart1.Click += chart1_Click;
             // 
             // panel1
             // 

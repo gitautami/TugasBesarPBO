@@ -64,5 +64,10 @@ namespace tbpbo2
             registerForm.Show();
             this.Hide();
         }
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

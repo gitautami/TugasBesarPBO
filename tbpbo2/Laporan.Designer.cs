@@ -52,8 +52,7 @@
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(219, 71);
-            chart1.Margin = new Padding(4);
+            chart1.Location = new Point(175, 57);
             chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -65,7 +64,7 @@
             series2.Name = "Series2";
             chart1.Series.Add(series1);
             chart1.Series.Add(series2);
-            chart1.Size = new Size(701, 572);
+            chart1.Size = new Size(561, 458);
             chart1.TabIndex = 45;
             chart1.Text = "chart1";
             // 
@@ -77,10 +76,9 @@
             panel1.Controls.Add(buttonJadwal);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(buttonInput);
-            panel1.Location = new Point(4, 2);
-            panel1.Margin = new Padding(4);
+            panel1.Location = new Point(3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(180, 765);
+            panel1.Size = new Size(144, 612);
             panel1.TabIndex = 47;
             // 
             // buttonInputManual
@@ -89,10 +87,9 @@
             buttonInputManual.ForeColor = Color.DarkRed;
             buttonInputManual.Image = (Image)resources.GetObject("buttonInputManual.Image");
             buttonInputManual.ImageAlign = ContentAlignment.TopCenter;
-            buttonInputManual.Location = new Point(0, 361);
-            buttonInputManual.Margin = new Padding(4);
+            buttonInputManual.Location = new Point(0, 289);
             buttonInputManual.Name = "buttonInputManual";
-            buttonInputManual.Size = new Size(180, 89);
+            buttonInputManual.Size = new Size(144, 71);
             buttonInputManual.TabIndex = 18;
             buttonInputManual.Text = "Input Manual Kondisi Kesehatan";
             buttonInputManual.TextAlign = ContentAlignment.BottomCenter;
@@ -104,13 +101,13 @@
             buttonLogout.BackColor = Color.DarkRed;
             buttonLogout.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(12, 648);
-            buttonLogout.Margin = new Padding(4);
+            buttonLogout.Location = new Point(10, 518);
             buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(155, 61);
+            buttonLogout.Size = new Size(124, 49);
             buttonLogout.TabIndex = 17;
             buttonLogout.Text = "Logout";
             buttonLogout.UseVisualStyleBackColor = false;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // buttonLaporan
             // 
@@ -118,10 +115,9 @@
             buttonLaporan.ForeColor = Color.DarkRed;
             buttonLaporan.Image = (Image)resources.GetObject("buttonLaporan.Image");
             buttonLaporan.ImageAlign = ContentAlignment.TopCenter;
-            buttonLaporan.Location = new Point(0, 504);
-            buttonLaporan.Margin = new Padding(4);
+            buttonLaporan.Location = new Point(0, 403);
             buttonLaporan.Name = "buttonLaporan";
-            buttonLaporan.Size = new Size(180, 89);
+            buttonLaporan.Size = new Size(144, 71);
             buttonLaporan.TabIndex = 5;
             buttonLaporan.Text = "Laporan Kesehatan";
             buttonLaporan.TextAlign = ContentAlignment.BottomCenter;
@@ -133,10 +129,9 @@
             buttonJadwal.ForeColor = Color.DarkRed;
             buttonJadwal.Image = (Image)resources.GetObject("buttonJadwal.Image");
             buttonJadwal.ImageAlign = ContentAlignment.TopCenter;
-            buttonJadwal.Location = new Point(0, 220);
-            buttonJadwal.Margin = new Padding(4);
+            buttonJadwal.Location = new Point(0, 176);
             buttonJadwal.Name = "buttonJadwal";
-            buttonJadwal.Size = new Size(180, 94);
+            buttonJadwal.Size = new Size(144, 75);
             buttonJadwal.TabIndex = 4;
             buttonJadwal.Text = "Jadwal Kunjungan";
             buttonJadwal.TextAlign = ContentAlignment.BottomCenter;
@@ -148,10 +143,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.DarkRed;
-            label1.Location = new Point(24, 26);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(19, 21);
             label1.Name = "label1";
-            label1.Size = new Size(131, 27);
+            label1.Size = new Size(109, 22);
             label1.TabIndex = 3;
             label1.Text = "Dashboard";
             // 
@@ -161,10 +155,9 @@
             buttonInput.ForeColor = Color.DarkRed;
             buttonInput.Image = (Image)resources.GetObject("buttonInput.Image");
             buttonInput.ImageAlign = ContentAlignment.TopCenter;
-            buttonInput.Location = new Point(0, 80);
-            buttonInput.Margin = new Padding(4);
+            buttonInput.Location = new Point(0, 64);
             buttonInput.Name = "buttonInput";
-            buttonInput.Size = new Size(180, 92);
+            buttonInput.Size = new Size(144, 74);
             buttonInput.TabIndex = 0;
             buttonInput.Text = "Input Data Pasien";
             buttonInput.TextAlign = ContentAlignment.BottomCenter;
@@ -176,10 +169,9 @@
             buttonEkspor.BackColor = Color.DarkRed;
             buttonEkspor.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonEkspor.ForeColor = Color.White;
-            buttonEkspor.Location = new Point(264, 666);
-            buttonEkspor.Margin = new Padding(4);
+            buttonEkspor.Location = new Point(211, 533);
             buttonEkspor.Name = "buttonEkspor";
-            buttonEkspor.Size = new Size(232, 45);
+            buttonEkspor.Size = new Size(186, 36);
             buttonEkspor.TabIndex = 48;
             buttonEkspor.Text = "Ekspor Laporan";
             buttonEkspor.UseVisualStyleBackColor = false;
@@ -187,13 +179,12 @@
             // 
             // Laporan
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1559, 766);
+            ClientSize = new Size(1247, 613);
             Controls.Add(buttonEkspor);
             Controls.Add(panel1);
             Controls.Add(chart1);
-            Margin = new Padding(4);
             Name = "Laporan";
             Text = "Grafik";
             Load += Grafik_Load;

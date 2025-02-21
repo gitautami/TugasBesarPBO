@@ -283,5 +283,12 @@ namespace tbpbo2
             formLaporan.Show();
             this.Hide();
         }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            login loginForm = new login();
+            loginForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -59,23 +59,46 @@ namespace tbpbo2
 
             foreach (var doc in pasienData)
             {
-                // Parsing data
-                DateTime tanggal = doc["Tanggal Pencatatan"].ToUniversalTime();
+                try
+                {
+                    // Parsing data tanggal
+                    DateTime tanggal = doc.Contains("Tanggal Pencatatan") ? doc["Tanggal Pencatatan"].ToUniversalTime() : DateTime.MinValue;
 
-                // Parsing Tekanan Darah
-                string tekananDarah = doc["Tekanan Darah"].AsString; // Ambil string "120/80"
-                var tekananParts = tekananDarah.Split('/'); // Pisahkan menjadi ["120", "80"]
-                double sistolik = double.Parse(tekananParts[0]);
-                double diastolik = double.Parse(tekananParts[1]);
+                    // Parsing Tekanan Darah (Validasi ditambahkan)
+                    if (doc.Contains("Tekanan Darah") && !string.IsNullOrWhiteSpace(doc["Tekanan Darah"].AsString))
+                    {
+                        string tekananDarah = doc["Tekanan Darah"].AsString.Trim();
+                        var tekananParts = tekananDarah.Split('/');
 
-                // Parsing Denyut Jantung
-                double denyutJantung = doc["Denyut Jantung"].ToDouble();
+                        // Pastikan array memiliki dua elemen sebelum parsing
+                        if (tekananParts.Length == 2 &&
+                            double.TryParse(tekananParts[0], out double sistolik) &&
+                            double.TryParse(tekananParts[1], out double diastolik))
+                        {
+                            // Parsing Denyut Jantung (Validasi)
+                            double denyutJantung = doc.Contains("Denyut Jantung") && doc["Denyut Jantung"].IsNumeric ? doc["Denyut Jantung"].ToDouble() : 0;
 
-                // Tambahkan data ke masing-masing seri
-                sistolikSeries.Points.AddXY(tanggal, sistolik);
-                diastolikSeries.Points.AddXY(tanggal, diastolik);
-                denyutJantungSeries.Points.AddXY(tanggal, denyutJantung);
+                            // Tambahkan data ke masing-masing seri
+                            sistolikSeries.Points.AddXY(tanggal, sistolik);
+                            diastolikSeries.Points.AddXY(tanggal, diastolik);
+                            denyutJantungSeries.Points.AddXY(tanggal, denyutJantung);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Format tekanan darah tidak valid: {tekananDarah}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Data tekanan darah tidak ditemukan atau kosong.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saat memproses data: {ex.Message}");
+                }
             }
+
 
             // 4. Tambahkan seri ke chart
             chart1.Series.Add(sistolikSeries);
@@ -266,6 +289,13 @@ namespace tbpbo2
         {
             InputManual formInputManual = new InputManual();
             formInputManual.Show();
+            this.Hide();
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            login loginForm = new login();
+            loginForm.Show();
             this.Hide();
         }
     }

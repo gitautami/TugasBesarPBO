@@ -45,6 +45,10 @@ namespace tbpbo2
 
                 // Tampilkan pesan berhasil
                 MessageBox.Show("Data berhasil dimasukkan ke database!");
+
+                login formLogin = new login();
+                formLogin.Show();
+                this.Close();
             }
             catch (Exception ex)
             {

@@ -366,6 +366,7 @@
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InputManual";
             Text = "InputManual";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

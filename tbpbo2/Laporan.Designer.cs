@@ -185,6 +185,7 @@
             Controls.Add(buttonEkspor);
             Controls.Add(panel1);
             Controls.Add(chart1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Laporan";
             Text = "Grafik";
             Load += Grafik_Load;

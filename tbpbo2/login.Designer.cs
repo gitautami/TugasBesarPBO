@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             pictureBox1 = new PictureBox();
             buttonLogin = new Button();
             textBoxPassword = new TextBox();
@@ -35,6 +36,8 @@
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
+            label5 = new Label();
+            linkLabel1 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -63,7 +66,7 @@
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(34, 229);
+            textBoxPassword.Location = new Point(34, 206);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.Size = new Size(262, 27);
             textBoxPassword.TabIndex = 15;
@@ -80,7 +83,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkRed;
-            label4.Location = new Point(34, 208);
+            label4.Location = new Point(34, 185);
             label4.Name = "label4";
             label4.Size = new Size(76, 18);
             label4.TabIndex = 12;
@@ -108,11 +111,35 @@
             label1.TabIndex = 9;
             label1.Text = "Welcome!";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.DarkRed;
+            label5.Location = new Point(34, 269);
+            label5.Name = "label5";
+            label5.Size = new Size(151, 18);
+            label5.TabIndex = 19;
+            label5.Text = "Belum Punya Akun?";
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(189, 269);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(63, 20);
+            linkLabel1.TabIndex = 18;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Register";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(745, 450);
+            Controls.Add(label5);
+            Controls.Add(linkLabel1);
             Controls.Add(pictureBox1);
             Controls.Add(buttonLogin);
             Controls.Add(textBoxPassword);
@@ -120,6 +147,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "login";
             Text = "login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -136,5 +164,7 @@
         private Label label4;
         private Label label3;
         private Label label1;
+        private Label label5;
+        private LinkLabel linkLabel1;
     }
 }

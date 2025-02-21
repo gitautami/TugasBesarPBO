@@ -57,5 +57,12 @@ namespace tbpbo2
             var user = collection.Find(filter).FirstOrDefault();
             return user != null;
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            register registerForm = new register();
+            registerForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -2,7 +2,6 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -18,103 +17,121 @@ namespace tbpbo2
 {
     public partial class Laporan : Form
     {
+        private IMongoCollection<BsonDocument> collection; // Tambahkan ini sebagai variabel global
+
         public Laporan()
         {
             InitializeComponent();
+            InitializeMongoDB();
+        }
+
+        private void InitializeMongoDB()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("tbpbo");
+            collection = database.GetCollection<BsonDocument>("pasien"); // Simpan di variabel global
         }
 
         private void Grafik_Load(object sender, EventArgs e)
         {
-            // 1. Koneksi ke MongoDB
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("tbpbo");
-            var collection = database.GetCollection<BsonDocument>("pasien");
-
-            // 2. Query data pasien
-            var pasienData = collection.Find(new BsonDocument()).ToList();
-
-            // 3. Siapkan data untuk grafik
-            chart1.Series.Clear(); // Hapus seri sebelumnya (jika ada)
-
-            // Tambahkan seri untuk Sistolik
-            var sistolikSeries = new Series("Sistolik")
+            if (collection == null)
             {
-                ChartType = SeriesChartType.Line,
-                BorderWidth = 2
-            };
+                MessageBox.Show("Gagal mengakses koleksi MongoDB.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            // Tambahkan seri untuk Diastolik
-            var diastolikSeries = new Series("Diastolik")
+            try
             {
-                ChartType = SeriesChartType.Line,
-                BorderWidth = 2
-            };
+                // 2. Query data pasien
+                var pasienData = collection.Find(new BsonDocument()).ToList();
 
-            // Tambahkan seri untuk Denyut Jantung
-            var denyutJantungSeries = new Series("Denyut Jantung")
-            {
-                ChartType = SeriesChartType.Line,
-                BorderWidth = 2
-            };
+                // 3. Siapkan data untuk grafik
+                chart1.Series.Clear(); // Hapus seri sebelumnya (jika ada)
 
-            foreach (var doc in pasienData)
-            {
-                try
+                // Tambahkan seri untuk Sistolik
+                var sistolikSeries = new Series("Sistolik")
                 {
-                    // Parsing data tanggal
-                    DateTime tanggal = doc.Contains("Tanggal Pencatatan") ? doc["Tanggal Pencatatan"].ToUniversalTime() : DateTime.MinValue;
+                    ChartType = SeriesChartType.Line,
+                    BorderWidth = 2
+                };
 
-                    // Parsing Tekanan Darah (Validasi ditambahkan)
-                    if (doc.Contains("Tekanan Darah") && !string.IsNullOrWhiteSpace(doc["Tekanan Darah"].AsString))
+                // Tambahkan seri untuk Diastolik
+                var diastolikSeries = new Series("Diastolik")
+                {
+                    ChartType = SeriesChartType.Line,
+                    BorderWidth = 2
+                };
+
+                // Tambahkan seri untuk Denyut Jantung
+                var denyutJantungSeries = new Series("Denyut Jantung")
+                {
+                    ChartType = SeriesChartType.Line,
+                    BorderWidth = 2
+                };
+
+                foreach (var doc in pasienData)
+                {
+                    try
                     {
-                        string tekananDarah = doc["Tekanan Darah"].AsString.Trim();
-                        var tekananParts = tekananDarah.Split('/');
+                        // Parsing data tanggal
+                        DateTime tanggal = doc.Contains("Tanggal Pencatatan") ? doc["Tanggal Pencatatan"].ToUniversalTime() : DateTime.MinValue;
 
-                        // Pastikan array memiliki dua elemen sebelum parsing
-                        if (tekananParts.Length == 2 &&
-                            double.TryParse(tekananParts[0], out double sistolik) &&
-                            double.TryParse(tekananParts[1], out double diastolik))
+                        // Parsing Tekanan Darah (Validasi ditambahkan)
+                        if (doc.Contains("Tekanan Darah") && !string.IsNullOrWhiteSpace(doc["Tekanan Darah"].AsString))
                         {
-                            // Parsing Denyut Jantung (Validasi)
-                            double denyutJantung = doc.Contains("Denyut Jantung") && doc["Denyut Jantung"].IsNumeric ? doc["Denyut Jantung"].ToDouble() : 0;
+                            string tekananDarah = doc["Tekanan Darah"].AsString.Trim();
+                            var tekananParts = tekananDarah.Split('/');
 
-                            // Tambahkan data ke masing-masing seri
-                            sistolikSeries.Points.AddXY(tanggal, sistolik);
-                            diastolikSeries.Points.AddXY(tanggal, diastolik);
-                            denyutJantungSeries.Points.AddXY(tanggal, denyutJantung);
+                            // Pastikan array memiliki dua elemen sebelum parsing
+                            if (tekananParts.Length == 2 &&
+                                double.TryParse(tekananParts[0], out double sistolik) &&
+                                double.TryParse(tekananParts[1], out double diastolik))
+                            {
+                                // Parsing Denyut Jantung (Validasi)
+                                double denyutJantung = doc.Contains("Denyut Jantung") && doc["Denyut Jantung"].IsNumeric ? doc["Denyut Jantung"].ToDouble() : 0;
+
+                                // Tambahkan data ke masing-masing seri
+                                sistolikSeries.Points.AddXY(tanggal, sistolik);
+                                diastolikSeries.Points.AddXY(tanggal, diastolik);
+                                denyutJantungSeries.Points.AddXY(tanggal, denyutJantung);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Format tekanan darah tidak valid: {tekananDarah}");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine($"Format tekanan darah tidak valid: {tekananDarah}");
+                            Console.WriteLine("Data tekanan darah tidak ditemukan atau kosong.");
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Data tekanan darah tidak ditemukan atau kosong.");
+                        Console.WriteLine($"Error saat memproses data: {ex.Message}");
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error saat memproses data: {ex.Message}");
-                }
+
+                // 4. Tambahkan seri ke chart
+                chart1.Series.Add(sistolikSeries);
+                chart1.Series.Add(diastolikSeries);
+                chart1.Series.Add(denyutJantungSeries);
+
+                // 5. Konfigurasi sumbu X dan Y
+                chart1.ChartAreas[0].AxisX.Title = "Tanggal";
+                chart1.ChartAreas[0].AxisX.LabelStyle.Format = "dd-MM-yyyy";
+                chart1.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+                chart1.ChartAreas[0].AxisY.Title = "Nilai";
+
+                chart1.ChartAreas[0].RecalculateAxesScale();
             }
-
-
-            // 4. Tambahkan seri ke chart
-            chart1.Series.Add(sistolikSeries);
-            chart1.Series.Add(diastolikSeries);
-            chart1.Series.Add(denyutJantungSeries);
-
-            // 5. Konfigurasi sumbu X dan Y
-            chart1.ChartAreas[0].AxisX.Title = "Tanggal";
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "dd-MM-yyyy";
-            chart1.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chart1.ChartAreas[0].AxisY.Title = "Nilai";
-
-            chart1.ChartAreas[0].RecalculateAxesScale();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat mengambil data pasien: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+    
 
-        private void buttonEkspor_Click(object sender, EventArgs e)
+    private void buttonEkspor_Click(object sender, EventArgs e)
         {
             string connectionString = "mongodb://localhost:27017"; // Ganti sesuai koneksi MongoDB-mu
             string databaseName = "tbpbo";
@@ -297,6 +314,11 @@ namespace tbpbo2
             login loginForm = new login();
             loginForm.Show();
             this.Hide();
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,22 +18,32 @@ namespace tbpbo2
 {
     public partial class Laporan : Form
     {
+        private IMongoCollection<BsonDocument> collection;
+
         public Laporan()
         {
             InitializeComponent();
+            InitializeMongoDB();
+        }
+        
+        private void InitializeMongoDB()
+        {
+            // Koneksi ke MongoDB
+            var connectionString = "mongodb://localhost:27017/";
+            var client = new MongoClient(connectionString);
+
+            // Pilih database dan koleksi
+            var database = client.GetDatabase("tbpbo");
+            collection = database.GetCollection<BsonDocument>("pasien");
         }
 
         private void Grafik_Load(object sender, EventArgs e)
         {
-            // 1. Koneksi ke MongoDB
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("tbpbo");
-            var collection = database.GetCollection<BsonDocument>("pasien");
 
-            // 2. Query data pasien
+            // 1. Query data pasien
             var pasienData = collection.Find(new BsonDocument()).ToList();
 
-            // 3. Siapkan data untuk grafik
+            // 2. Siapkan data untuk grafik
             chart1.Series.Clear(); // Hapus seri sebelumnya (jika ada)
 
             // Tambahkan seri untuk Sistolik

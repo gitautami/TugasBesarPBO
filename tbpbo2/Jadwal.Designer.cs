@@ -386,6 +386,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Jadwal";
             Text = "Jadwal";
+            Load += Jadwal_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewKunjungan).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

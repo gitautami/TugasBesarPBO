@@ -333,5 +333,10 @@ namespace tbpbo2
             loginForm.Show();
             this.Hide();
         }
+
+        private void Jadwal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

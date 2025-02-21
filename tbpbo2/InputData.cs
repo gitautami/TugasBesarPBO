@@ -14,13 +14,13 @@ using static System.Windows.Forms.DataFormats;
 
 namespace tbpbo2
 {
-    public partial class InputData : Form
+    public partial class InputData : Form //inheritance(pewarisan)
     {
         // Deklarasi koleksi MongoDB
-        private IMongoCollection<BsonDocument> collection;
+        private IMongoCollection<BsonDocument> collection; // Encapsulation
         public InputData()
         {
-            InitializeComponent();
+            InitializeComponent();  //class
             InitializeMongoDB();
             LoadDataToGridView();
         }
@@ -39,34 +39,65 @@ namespace tbpbo2
         {
             try
             {
-                var data = new BsonDocument
-        {
-            { "NamaPasien", textBoxNama.Text },
-            { "TanggalLahir", dateTimePickerTTL.Value },
-            { "JenisKelamin", comboBoxJenis.Text },
-            { "NomorTelepon", textBoxNomorTLP.Text },
-            { "Alamat", textBoxAlamat.Text },
-            { "GolonganDarah", comboBoxGolongan.Text },
-            { "RiwayatPenyakit", textBoxRiwayat.Text },
-            { "Alergi", textBoxAlergi.Text },
-            { "KontakDarurat", new BsonDocument
+                if (dataGridView1.SelectedRows.Count > 0) // Jika ada data yang dipilih, lakukan update
                 {
+                    var selectedRow = dataGridView1.SelectedRows[0];
+                    var id = selectedRow.Cells["_id"].Value.ToString();
+                    var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+
+                    var update = Builders<BsonDocument>.Update
+                        .Set("NamaPasien", textBoxNama.Text)
+                        .Set("TanggalLahir", dateTimePickerTTL.Value)
+                        .Set("JenisKelamin", comboBoxJenis.Text)
+                        .Set("NomorTelepon", textBoxNomorTLP.Text)
+                        .Set("Alamat", textBoxAlamat.Text)
+                        .Set("GolonganDarah", comboBoxGolongan.Text)
+                        .Set("RiwayatPenyakit", textBoxRiwayat.Text)
+                        .Set("Alergi", textBoxAlergi.Text)
+                        .Set("KontakDarurat", new BsonDocument
+                        {
                     { "Nama", textBoxNamaDarurat.Text },
                     { "NomorTelepon", textBoxNomorDarurat.Text },
                     { "Hubungan", textBoxHubunganDarurat.Text }
-            }
+                        });
+
+                    var result = collection.UpdateOne(filter, update);
+
+                    if (result.ModifiedCount > 0)
+                    {
+                        MessageBox.Show("Data pasien berhasil diperbarui!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-        };
-                // Simpan data ke MongoDB
-                collection.InsertOne(data);
+                    else
+                    {
+                        MessageBox.Show("Data pasien tidak ditemukan atau tidak ada perubahan.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else // Jika tidak ada data yang dipilih, lakukan insert baru
+                {
+                    var data = new BsonDocument
+            {
+                { "NamaPasien", textBoxNama.Text },
+                { "TanggalLahir", dateTimePickerTTL.Value },
+                { "JenisKelamin", comboBoxJenis.Text },
+                { "NomorTelepon", textBoxNomorTLP.Text },
+                { "Alamat", textBoxAlamat.Text },
+                { "GolonganDarah", comboBoxGolongan.Text },
+                { "RiwayatPenyakit", textBoxRiwayat.Text },
+                { "Alergi", textBoxAlergi.Text },
+                { "KontakDarurat", new BsonDocument
+                    {
+                        { "Nama", textBoxNamaDarurat.Text },
+                        { "NomorTelepon", textBoxNomorDarurat.Text },
+                        { "Hubungan", textBoxHubunganDarurat.Text }
+                    }
+                }
+            };
 
-                // Tampilkan pesan berhasil
-                MessageBox.Show("Data pasien berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    collection.InsertOne(data);
+                    MessageBox.Show("Data pasien berhasil disimpan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                // Reset form
                 ResetForm();
-
-                // Muat ulang data ke DataGridView
                 LoadDataToGridView();
             }
             catch (Exception ex)
@@ -74,6 +105,8 @@ namespace tbpbo2
                 MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
         private void ResetForm()
         {
             textBoxNama.Clear();
@@ -176,69 +209,9 @@ namespace tbpbo2
             }
         }
 
-        private void buttonSimpanEdit_Click(object sender, EventArgs e)
+        private void buttonJadwal_Click(object sender, EventArgs e) //Polimorfisme
         {
-            try
-            {
-                // Pastikan baris dipilih di DataGridView
-                if (dataGridView1.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("Pilih data yang ingin diedit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // Ambil _id dari baris yang dipilih
-                var selectedRow = dataGridView1.SelectedRows[0];
-                var id = selectedRow.Cells["_id"].Value.ToString();
-
-                // Filter berdasarkan _id
-                var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
-
-                // Perbarui data berdasarkan input pengguna
-                var update = Builders<BsonDocument>.Update
-                    .Set("NamaPasien", textBoxNama.Text)
-                    .Set("TanggalLahir", dateTimePickerTTL.Value)
-                    .Set("JenisKelamin", comboBoxJenis.Text)
-                    .Set("NomorTelepon", textBoxNomorTLP.Text)
-                    .Set("Alamat", textBoxAlamat.Text)
-                    .Set("GolonganDarah", comboBoxGolongan.Text)
-                    .Set("RiwayatPenyakit", textBoxRiwayat.Text)
-                    .Set("Alergi", textBoxAlergi.Text)
-                    .Set("KontakDarurat", new BsonDocument
-                    {
-                { "Nama", textBoxNamaDarurat.Text },
-                { "NomorTelepon", textBoxNomorDarurat.Text },
-                { "Hubungan", textBoxHubunganDarurat.Text }
-                    });
-
-                // Perbarui data di MongoDB
-                var result = collection.UpdateOne(filter, update);
-
-                // Periksa apakah data berhasil diperbarui
-                if (result.ModifiedCount > 0)
-                {
-                    MessageBox.Show("Data pasien berhasil diperbarui!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Muat ulang data ke DataGridView
-                    LoadDataToGridView();
-
-                    // Reset form
-                    ResetForm();
-                }
-                else
-                {
-                    MessageBox.Show("Data pasien tidak ditemukan atau tidak ada perubahan.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Terjadi kesalahan saat mengedit data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void buttonJadwal_Click(object sender, EventArgs e)
-        {
-            Jadwal formJadwal = new Jadwal();
+            Jadwal formJadwal = new Jadwal(); // objek
             formJadwal.Show();
             this.Hide();
         }
@@ -257,7 +230,7 @@ namespace tbpbo2
             this.Hide();
         }
 
-        private void buttonLaporan_Click(object sender, EventArgs e)
+        private void buttonLaporan_Click(object sender, EventArgs e) //Polimorfisme
         {
             Laporan formLaporan = new Laporan();
             formLaporan.Show();
